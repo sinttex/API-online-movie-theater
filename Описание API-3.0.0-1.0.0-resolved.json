@@ -1,0 +1,687 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Итоговая работа по разделу - Интеграция систем и документирование API",
+    "description": "Контекст задания: кинотеатр “Искорка”, для которого вы ранее разработали многофункциональный API, планирует запустить бонусную программу для постоянных посетителей.",
+    "contact": {
+      "email": "dps812@yandex.ru"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/TMP207_1/3.0.0/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Описание БТ№1:",
+      "description": "Участие в бонусной программе необязательно, при желании посетитель может оформить бонусную карту"
+    },
+    {
+      "name": "Описание БТ№2:",
+      "description": "Если клиент указывает при бронировании номер карты, то 10% стоимости бронирования зачисляется на карту в виде бонусных баллов (1 балл = 1 рубль)."
+    },
+    {
+      "name": "Описание БТ№3:",
+      "description": "Баллы начисляются автоматически сразу после оплаты брони."
+    },
+    {
+      "name": "Описание БТ№4:",
+      "description": "При бронировании клиент может оплачивать до 50% стоимости билетов бонусными баллами."
+    },
+    {
+      "name": "Описание БТ№5:",
+      "description": "Как часто клиенты используют бонусную карту при бронировании."
+    },
+    {
+      "name": "Описание БТ№6:",
+      "description": "Баллы начисляются автоматически сразу после оплаты брони."
+    }
+  ],
+  "paths": {
+    "/Описание БТ№1": {
+      "post": {
+        "tags": [
+          "Описание БТ№1:"
+        ],
+        "summary": "Добавить новую бонусную карту",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ 1_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "новая карта создана",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Билет": {
+      "get": {
+        "tags": [
+          "Описание БТ№2:"
+        ],
+        "summary": "получить стоимость билета и id бонусной катры",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id_ticket",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "booked",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "стоимость билета, id_бонусной карты",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_1"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Бонусная карта": {
+      "get": {
+        "tags": [
+          "Описание БТ№2:"
+        ],
+        "summary": "получить размер скидки, текущую сумму баллов",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id_bonus_card",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "размер скидки, текущие бонусные баллы",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_2"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Бонусная карта(обновить баллы)": {
+      "put": {
+        "tags": [
+          "Описание БТ№2:"
+        ],
+        "summary": "перезаписать сумму бонусных баллов на карту",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/  _body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "сумма новых бонусных баллов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_3"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Оплата": {
+      "get": {
+        "tags": [
+          "Описание БТ№3:"
+        ],
+        "summary": "получить оплаченные билеты и списанные баллыы",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id_ payment",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "paid",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "стоимо          сть билета, id_бонусной карты",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_4"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Билет.": {
+      "get": {
+        "tags": [
+          "Описание БТ№3:"
+        ],
+        "summary": "получить размер скидки, текущую сумму баллов",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id_ticket",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "размер скидки, текущие бонусные баллы",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Бонусная карта(нов.данные)": {
+      "put": {
+        "tags": [
+          "Описание БТ№3:"
+        ],
+        "summary": "перезаписать сумму бонусных баллов на карту",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ __body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "сумма новых бонусных баллов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_3"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Билет..": {
+      "get": {
+        "tags": [
+          "Описание БТ№4:"
+        ],
+        "summary": "получить стоимость билета, номер бонусной карты",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id_ticket",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "стоимость билета, id_бонусной карты",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_5"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Бнусная карта.": {
+      "get": {
+        "tags": [
+          "Описание БТ№4:"
+        ],
+        "summary": "получить текущую сумму баллов",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id_ bonus_card",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "текущие бонусные баллы",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ __body"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Оплата.": {
+      "put": {
+        "tags": [
+          "Описание БТ№4:"
+        ],
+        "summary": "перезаписать в оплату is билета и списанные баллы",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/__body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "сумма новых бонусных баллов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_3"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Билет...": {
+      "get": {
+        "tags": [
+          "Описание БТ№5:"
+        ],
+        "summary": "получить билеты оплаченные",
+        "description": "",
+        "parameters": [
+          {
+            "name": "payment_with_bonus_points",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "плачено бонусными баллами бонусными баллами",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_6"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Билет.,": {
+      "get": {
+        "tags": [
+          "Описание БТ№5:"
+        ],
+        "summary": "получить не оплаченные бонусными баллами",
+        "description": "",
+        "parameters": [
+          {
+            "name": "payment_with_bonus_points",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " не плачено бонусными баллами",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_6"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Билет..,": {
+      "get": {
+        "tags": [
+          "Описание БТ№6:"
+        ],
+        "summary": "получить не оплаченные бонусными баллами",
+        "description": "",
+        "parameters": [
+          {
+            "name": "payment_with_bonus_points",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": " не плачено бонусными баллами",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_7"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Оплата..": {
+      "get": {
+        "tags": [
+          "Описание БТ№6:"
+        ],
+        "summary": "перезаписать в оплату is билета и списанные баллы",
+        "description": "",
+        "parameters": [
+          {
+            "name": "deducted points",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "paid",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "сумма новых бонусных баллов",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_8"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      " 1_body": {
+        "type": "object",
+        "properties": {
+          "holder_name": {
+            "type": "string"
+          },
+          "discount amount": {
+            "type": "integer"
+          },
+          "purchases": {
+            "type": "integer"
+          },
+          "discount points": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200": {
+        "type": "object",
+        "properties": {
+          "id_bonus_card": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_1": {
+        "type": "object",
+        "properties": {
+          "id_ticket": {
+            "type": "integer"
+          },
+          "ticket_price": {
+            "type": "integer"
+          },
+          "id_bonus_card": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_2": {
+        "type": "object",
+        "properties": {
+          "id_bonus_card": {
+            "type": "integer"
+          },
+          "discount_amount": {
+            "type": "integer"
+          },
+          "bonus_points_amount": {
+            "type": "integer"
+          }
+        }
+      },
+      "  _body": {
+        "type": "object",
+        "properties": {
+          "id_bonus_card": {
+            "type": "integer"
+          },
+          "discount_points": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_3": {
+        "type": "object",
+        "properties": {
+          "discount_points": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_4": {
+        "type": "object",
+        "properties": {
+          "id_ticket": {
+            "type": "integer"
+          },
+          "points_deducted": {
+            "type": "integer"
+          }
+        }
+      },
+      " __body": {
+        "type": "object",
+        "properties": {
+          "id_bonus_card": {
+            "type": "integer"
+          },
+          "discount_points": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_5": {
+        "type": "object",
+        "properties": {
+          "ticket_price": {
+            "type": "integer"
+          },
+          "id_bonus_card": {
+            "type": "integer"
+          }
+        }
+      },
+      "__body": {
+        "type": "object",
+        "properties": {
+          "id_ payment": {
+            "type": "integer"
+          },
+          "id_ticket": {
+            "type": "integer"
+          },
+          "deducted points": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_6": {
+        "type": "object",
+        "properties": {
+          "id_bonus_card": {
+            "type": "integer"
+          },
+          "id_ticket": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_7": {
+        "type": "object",
+        "properties": {
+          "id_ticket": {
+            "type": "integer"
+          },
+          "ticket_price": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_200_8": {
+        "type": "object",
+        "properties": {
+          "id_ticket": {
+            "type": "integer"
+          },
+          "discount_points": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}
